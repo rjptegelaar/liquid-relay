@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:amq="http://activemq.apache.org/schema/core" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd 
+							http://activemq.apache.org/schema/core 
+                           	http://activemq.apache.org/schema/core/activemq-core.xsd 
+                           	http://www.springframework.org/schema/jms 
+                           	http://www.springframework.org/schema/jms/spring-jms.xsd
+                           	http://www.springframework.org/schema/context
+                           	http://www.springframework.org/schema/context/spring-context.xsd
+                           	http://www.springframework.org/schema/task 
+                           	http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>file:relay.properties</value>
+				<value>file:conf/relay.properties</value>
+				<value>file:${LIQUID_HOME}/conf/relay.properties</value>
+			</list>
+		</property>		
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+	</bean>
+
+	<amq:broker id="relayBroker" useJmx="true" persistent="false">
+		<amq:managementContext>
+			<amq:managementContext createConnector="false"/>
+		</amq:managementContext>
+		<amq:transportConnectors>
+			<amq:transportConnector uri="${relay_url}" />
+			<amq:transportConnector uri="${relay_stomp_url}" />
+		</amq:transportConnectors>
+	</amq:broker>		
+
+	<amq:connectionFactory id="relayJmsConnectionFactory"
+		brokerURL="${relay_url}" />
+
+	<bean id="relaySingleConnectionFactory"
+		class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="relayJmsConnectionFactory" />
+		<property name="reconnectOnException" value="true" />
+	</bean>
+
+	<bean id="relayCachingConnectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="relaySingleConnectionFactory" />
+		<property name="sessionCacheSize" value="100" />
+	</bean>
+
+ 
+	<jms:listener-container container-type="default"
+		connection-factory="relayCachingConnectionFactory" acknowledge="auto"
+		concurrency="1" cache="consumer">
+		<jms:listener destination="com.pte.liquid.relay.xml.in" ref="relayXmlMessageListener"
+			method="onMessage" id="xmlListener"/>
+	</jms:listener-container>
+  
+	<jms:listener-container container-type="default"
+		connection-factory="relayCachingConnectionFactory" acknowledge="auto"
+		concurrency="1" cache="consumer">
+		<jms:listener destination="com.pte.liquid.relay.json.in" ref="relayJsonMessageListener"
+			method="onMessage" id="jsonListener"/>
+	</jms:listener-container>
+
+	<bean name="relayJsonMessageListener" class="com.pte.liquid.relay.RelayMessageListener">
+		<property name="transport" ref="relayJmsTransport" />
+		<property name="converter" ref="relayJsonJmsConverter"/>
+	</bean>
+	
+	<bean name="relayXmlMessageListener" class="com.pte.liquid.relay.RelayMessageListener">
+		<property name="transport" ref="relayJmsTransport" />
+		<property name="converter" ref="relayXmlJmsConverter"/>
+	</bean>
+
+	<bean name="relayJsonJmsConverter" class="com.pte.liquid.relay.jms.JmsConverter">
+		<property name="unmarshaller" ref="relayJsonMarshaller" />
+	</bean>
+	
+	<bean name="relayXmlJmsConverter" class="com.pte.liquid.relay.jms.JmsConverter">
+		<property name="unmarshaller" ref="relayXmlMarshaller" />
+	</bean>
+
+	<bean id="targetJmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL">
+			<value>${server_url}</value>
+		</property>
+	</bean>
+
+	<bean id="targetSingleConnectionFactory"
+		class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="targetJmsConnectionFactory" />
+		<property name="reconnectOnException" value="true" />
+	</bean>
+
+	<bean id="targetCachingConnectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="targetSingleConnectionFactory" />
+		<property name="sessionCacheSize" value="100" />
+	</bean>
+
+	<bean id="targetJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory">
+			<ref local="targetCachingConnectionFactory" />
+		</property>
+		<property name="defaultDestinationName" value="com.pte.liquid.relay.in"></property>
+	</bean>
+
+	<bean id="relayJmsTransport" class="com.pte.liquid.relay.client.jms.JmsTransport">
+		<property name="template" ref="targetJmsTemplate"></property>
+		<property name="marshaller" ref="relayXmlMarshaller"></property>
+	</bean>
+
+	<bean id="relayJsonMarshaller" class="com.pte.liquid.relay.marshaller.json.JsonMarshaller"/>	
+
+	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="classesToBeBound">
+			<list>
+				<value>com.pte.liquid.relay.model.Message</value>
+				<value>com.pte.liquid.relay.model.MessageHeader</value>
+				<value>com.pte.liquid.relay.model.MessagePart</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="relayXmlMarshaller" class="com.pte.liquid.relay.marshaller.xml.XmlMarshaller">
+		<property name="marshaller" ref="marshaller"></property>
+		<property name="unmarshaller" ref="marshaller"></property>
+	</bean>
+
+</beans>
