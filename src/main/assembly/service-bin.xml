@@ -12,7 +12,6 @@
       <excludes>
       	<exclude>src</exclude>
       	<exclude>application-context.xml</exclude>
-      	<exclude>log4j.properties</exclude>
       </excludes>
     </fileSet>
     <fileSet>
@@ -41,6 +40,7 @@
       <outputDirectory>/conf</outputDirectory>
       <includes>
         <include>relay.properties</include>
+        <include>log4j.properties</include>        
       </includes>
     </fileSet>  
     <fileSet>

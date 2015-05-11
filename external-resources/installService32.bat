@@ -56,6 +56,6 @@ REM JVM configuration
 set PR_JVMMS=256
 set PR_JVMMX=1024
 set PR_JVMSS=4000
-set PR_JVMOPTIONS=-Duser.language=NE;-Duser.region=ne
+set PR_JVMOPTIONS=-Duser.language=NE;-Duser.region=ne;-Dlog4j.configuration="file:%LIQUID_HOME%\conf\log4j.properties"
 REM Install service 
 %LIQUID_HOME%\bin\prunsrv.exe //IS//%SERVICE_NAME%

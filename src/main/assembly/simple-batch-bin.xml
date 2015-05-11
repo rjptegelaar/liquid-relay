@@ -12,7 +12,6 @@
       <excludes>
       	<exclude>src</exclude>
       	<exclude>application-context.xml</exclude>
-      	<exclude>log4j.properties</exclude>
       	<exclude>bin</exclude>
       	<exclude>procrun</exclude>
       </excludes>
@@ -23,8 +22,9 @@
       <includes>
         <include>relay.properties</include>
         <include>run.bat</include>
+        <include>log4j.properties</include>
       </includes>
-    </fileSet>                
+    </fileSet>
   </fileSets>
    <dependencySets>
     <dependencySet>
