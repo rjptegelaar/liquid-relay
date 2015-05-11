@@ -6,9 +6,9 @@
 	<version>0.0.4-SNAPSHOT</version>
 	<name>relay</name>
 	<scm>
-		<connection>scm:svn:https://liquid-relay.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://liquid-relay.googlecode.com/svn/trunk/</developerConnection>
-		<url>https://liquid-relay.googlecode.com/svn/trunk/</url>
+		<connection>scm:git:https://github.com/rjptegelaar/liquid-relay.git</connection>
+		<developerConnection>scm:git:https://github.com/rjptegelaar/liquid-relay.git/</developerConnection>
+		<url>https://github.com/rjptegelaar/liquid-relay.git</url>
 	</scm>
 	<profiles>
 		<profile>
