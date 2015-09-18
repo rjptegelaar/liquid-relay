@@ -1,4 +1,5 @@
 <assembly>  
+ <id>relay-service</id>
   <formats>
     <format>zip</format>
   </formats>
@@ -76,8 +77,8 @@
         <include>*relay*</include>
       </includes>
       <excludes>
-      	<exclude>*RelayInterfaces</exclude>
-      	<exclude>*RelayApi</exclude>
+      	<exclude>*RelayInterfaces*</exclude>
+      	<exclude>*RelayApi*</exclude>
       </excludes>            
     </dependencySet>  
   </dependencySets>
