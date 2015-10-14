@@ -39,7 +39,8 @@ public class JmsConverter implements Converter<Message> {
 			
 			try {
 				String content = ((TextMessage) msg).getText();					
-				logger.debug("Received textmessage.");	
+				logger.info("Received textmessage.");
+				logger.info(content);
 				return (com.pte.liquid.relay.model.Message) unmarshaller
 						.unmarshal(content);
 			} catch (JMSException e) {
@@ -55,7 +56,8 @@ public class JmsConverter implements Converter<Message> {
 				byte[] content = new byte[(int) bm.getBodyLength()];
 								
 				bm.readBytes(content);
-				logger.debug("Received bytesmessage.");
+				logger.info("Received bytesmessage.");
+				logger.info(new String(content));
 				return (com.pte.liquid.relay.model.Message) unmarshaller
 						.unmarshal(new String(content));
 			} catch (JMSException e) {

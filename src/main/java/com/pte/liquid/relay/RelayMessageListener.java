@@ -51,7 +51,7 @@ public class RelayMessageListener implements MessageListener {
 		try {
 			logger.info("Incoming message: " + msg);
 			com.pte.liquid.relay.model.Message m = converter.convert(msg);
-			logger.info("Converted message: " + msg);
+			logger.info("Converted message: " + m);
 			transport.send(m);
 			logger.info("Message sent");
 			msg.acknowledge();
