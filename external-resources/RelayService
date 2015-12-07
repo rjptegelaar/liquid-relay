@@ -38,10 +38,10 @@ EXEC="/usr/bin/jsvc"
 FILE_PATH="$LIQUID_HOME"
 
 # Our classpath including our jar file and the Apache Commons Daemon library
-CLASS_PATH="$FILE_PATH/lib/relay.jar:$FILE_PATH/lib/commons-daemon-1.0.15.jar"
+CLASS_PATH="$FILE_PATH/relay.jar:$FILE_PATH/lib/commons-daemon-1.0.15.jar"
 
 # The fully qualified name of the class to execute
-CLASS="com.pte.liquid.relay.RelayDaemon"
+CLASS="com.pte.liquid.relay.Relay"
 
 # Any command line arguments to be passed to the RelayService implementations init() method 
 ARGS=""

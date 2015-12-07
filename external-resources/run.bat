@@ -1,1 +1,1 @@
-java -jar lib/relay.jar -Dlog4j.configuration="log4j.properties"
+java -jar relay.jar

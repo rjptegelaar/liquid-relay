@@ -23,7 +23,6 @@ import org.springframework.oxm.XmlMappingException;
 
 import com.pte.liquid.relay.Converter;
 import com.pte.liquid.relay.Marshaller;
-import com.pte.liquid.relay.RelayService;
 import com.pte.liquid.relay.exception.RelayException;
 
 public class JmsConverter implements Converter<Message> {
@@ -39,8 +38,8 @@ public class JmsConverter implements Converter<Message> {
 			
 			try {
 				String content = ((TextMessage) msg).getText();					
-				logger.info("Received textmessage.");
-				logger.info(content);
+				logger.debug("Received textmessage.");
+				logger.debug(content);
 				return (com.pte.liquid.relay.model.Message) unmarshaller
 						.unmarshal(content);
 			} catch (JMSException e) {
@@ -56,8 +55,8 @@ public class JmsConverter implements Converter<Message> {
 				byte[] content = new byte[(int) bm.getBodyLength()];
 								
 				bm.readBytes(content);
-				logger.info("Received bytesmessage.");
-				logger.info(new String(content));
+				logger.debug("Received bytesmessage.");
+				logger.debug(new String(content));
 				return (com.pte.liquid.relay.model.Message) unmarshaller
 						.unmarshal(new String(content));
 			} catch (JMSException e) {
