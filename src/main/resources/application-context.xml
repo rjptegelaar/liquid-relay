@@ -38,7 +38,7 @@
 	</amq:broker>		
 
 	<amq:connectionFactory id="relayJmsConnectionFactory"
-		brokerURL="${relay_url}" />
+		brokerURL="vm://localhost" />
 
 	<bean id="relaySingleConnectionFactory"
 		class="org.springframework.jms.connection.SingleConnectionFactory">
@@ -112,7 +112,7 @@
 
 	<bean id="relayJmsTransport" class="com.pte.liquid.relay.client.jms.JmsTransport">
 		<property name="template" ref="targetJmsTemplate"></property>
-		<property name="marshaller" ref="relayXmlMarshaller"></property>
+		<property name="marshaller" ref="relayJsonMarshaller"></property>
 	</bean>
 
 	<bean id="relayJsonMarshaller" class="com.pte.liquid.relay.marshaller.json.JsonMarshaller"/>	
