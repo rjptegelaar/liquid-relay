@@ -35,10 +35,29 @@
 			<amq:transportConnector uri="${relay_url}" />
 			<amq:transportConnector uri="${relay_stomp_url}" />
 		</amq:transportConnectors>
+		<amq:plugins>
+			<amq:simpleAuthenticationPlugin anonymousAccessAllowed="true">
+				<amq:users>
+					<amq:authenticationUser groups="admins" username="${liquid.relay.username}" password="${liquid.relay.password}"/>
+					<amq:authenticationUser groups="anonymous" username="" password=""/>
+				</amq:users>				
+			</amq:simpleAuthenticationPlugin>
+			<amq:authorizationPlugin>			
+		        <amq:map>
+		        	<amq:authorizationMap>		          
+		            <amq:authorizationEntries>		              	
+		              <amq:authorizationEntry topic="ActiveMQ.Advisory.>" read="admins" write="admins" admin="admins" />	              		             
+		              <amq:authorizationEntry queue="com.pte.liquid.relay.json.in" read="anonymous,admins" write="anonymous,admins" admin="admins"/>
+		              <amq:authorizationEntry queue="com.pte.liquid.relay.xml.in" read="anonymous,admins" write="anonymous,admins" admin="admins" />  
+		            </amq:authorizationEntries>
+		          </amq:authorizationMap>
+		        </amq:map>			
+			</amq:authorizationPlugin>
+		</amq:plugins>
 	</amq:broker>		
 
 	<amq:connectionFactory id="relayJmsConnectionFactory"
-		brokerURL="vm://localhost" />
+		brokerURL="vm://localhost" userName="${liquid.relay.username}" password="${liquid.relay.password}"/>
 
 	<bean id="relaySingleConnectionFactory"
 		class="org.springframework.jms.connection.SingleConnectionFactory">
@@ -89,6 +108,8 @@
 		<property name="brokerURL">
 			<value>${server_url}</value>
 		</property>
+		<property name="userName" value="${liquid.server.username}"></property>
+		<property name="password" value="${liquid.server.password}"></property>
 	</bean>
 
 	<bean id="targetSingleConnectionFactory"
