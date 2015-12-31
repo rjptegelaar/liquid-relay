@@ -48,14 +48,10 @@ public class RelayMessageListener implements MessageListener {
 	@Override
 	public void onMessage(Message msg) {
 		logger.debug("Received message.");
-		try {
-			logger.debug("Incoming message: " + msg);
-			com.pte.liquid.relay.model.Message m = converter.convert(msg);
-			logger.debug("Converted message: " + m);
-			transport.send(m);
-			logger.debug("Message sent");
+		try {			
+			com.pte.liquid.relay.model.Message m = converter.convert(msg);			
+			transport.send(m);			
 			msg.acknowledge();
-			logger.debug("Message ack sent");
 		} catch (RelayException e) {
 			logger.error("Dumping incoming message: " + e.getMessage());
 			if(logger.isDebugEnabled()){
