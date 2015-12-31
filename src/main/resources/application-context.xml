@@ -21,7 +21,7 @@
 			<list>
 				<value>file:relay.properties</value>
 				<value>file:conf/relay.properties</value>
-				<value>file:${LIQUID_HOME}/conf/relay.properties</value>
+				<value>file:${LIQUID_RELAY_HOME}/conf/relay.properties</value>
 			</list>
 		</property>		
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />

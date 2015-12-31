@@ -16,15 +16,15 @@ if exist %JAVA_HOME%\bin\server\jvm.dll (
     set JVM=%JAVA_HOME%\jre\bin\server\jvm.dll  
 )
 
-if defined LIQUID_HOME (
-	echo LIQUID_HOME IS defined
+if defined LIQUID_RELAY_HOME (
+	echo LIQUID_RELAY_HOME IS defined
 ) else (
-	set LIQUID_HOME=%~dp0
+	set LIQUID_RELAY_HOME=%~dp0
 )
 
-echo Using %LIQUID_HOME% as liquid home directory
+echo Using %LIQUID_RELAY_HOME% as liquid home directory
 
 set SERVICE_NAME=RelayService
 
 REM Remove service 
-%LIQUID_HOME%\bin\prunsrv.exe //DS//%SERVICE_NAME%
+%LIQUID_RELAY_HOME%\bin\prunsrv.exe //DS//%SERVICE_NAME%

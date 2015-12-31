@@ -10,11 +10,11 @@
 #                    and should be placed in /etc/init.d
 ### END INIT INFO
 
-if env | grep -q ^LIQUID_HOME=
+if env | grep -q ^LIQUID_RELAY_HOME=
  then
-  echo LIQUID_HOME IS defined
+  echo LIQUID_RELAY_HOME IS defined
  else
-	echo LIQUID_HOME is not defined
+	echo LIQUID_RELAY_HOME is not defined
 	echo This environment variable is needed to run this program
 	exit
 fi
@@ -35,7 +35,7 @@ DESC="RelayService"
 EXEC="/usr/bin/jsvc"
 
 # The path to the folder containing relay.jar
-FILE_PATH="$LIQUID_HOME"
+FILE_PATH="$LIQUID_RELAY_HOME"
 
 # Our classpath including our jar file and the Apache Commons Daemon library
 CLASS_PATH="$FILE_PATH/relay.jar:$FILE_PATH/lib/commons-daemon-1.0.15.jar"

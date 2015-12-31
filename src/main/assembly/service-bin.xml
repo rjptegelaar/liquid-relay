@@ -5,48 +5,44 @@
 	</formats>
 	<fileSets>
 		<fileSet>
-			<directory>external-resources</directory>
-			<outputDirectory>/conf</outputDirectory>
-			<includes>
-				<include>relay.properties</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>external-resources</directory>
-			<outputDirectory>/</outputDirectory>
-			<includes>
-				<include>*install*.*</include>
-				<include>run.bat</include>
-				<include>RelayService</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<outputDirectory>/logs</outputDirectory>
-			<excludes>
-				<exclude>**/*</exclude>
-			</excludes>
-		</fileSet>
-		<fileSet>
-			<directory>external-resources/bin/ia64</directory>
-			<outputDirectory>/bin/ia64</outputDirectory>
-			<includes>
-				<include>*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>external-resources/bin/amd64</directory>
-			<outputDirectory>/bin/amd64</outputDirectory>
-			<includes>
-				<include>*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
 			<directory>external-resources/bin/</directory>
 			<outputDirectory>/bin/</outputDirectory>
 			<includes>
 				<include>*</include>
 			</includes>
 		</fileSet>
+		<fileSet>
+			<directory>external-resources</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>*</include>
+			</includes>
+		</fileSet>			
+		<fileSet>
+			<directory>external-resources/bin/ia64</directory>
+			<outputDirectory>/bin/ia64</outputDirectory>
+			<includes>
+				<include>*.exe</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>external-resources/bin/amd64</directory>
+			<outputDirectory>/bin/amd64</outputDirectory>
+			<includes>
+				<include>*.exe</include>
+			</includes>
+		</fileSet>		
+		<fileSet>
+			<directory>conf</directory>
+			<outputDirectory>/conf</outputDirectory>
+			<includes>
+				<include>relay.properties</include>
+			</includes>
+		</fileSet>
+    	<fileSet> 
+        	<outputDirectory>logs</outputDirectory>
+        	<excludes><exclude>**/*</exclude></excludes>
+    	</fileSet>	
 	</fileSets>
 	<dependencySets>
 		<dependencySet>
@@ -55,8 +51,7 @@
 			<unpack>false</unpack>
 		</dependencySet>
 		<dependencySet>
-			<outputFileNameMapping>${artifact.artifactId}${dashClassifier?}.${artifact.extension}
-			</outputFileNameMapping>
+			<outputFileNameMapping>${artifact.artifactId}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
 			<outputDirectory>/</outputDirectory>
 			<unpack>false</unpack>
 			<includes>
