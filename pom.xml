@@ -14,8 +14,9 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/rjptegelaar/liquid-relay.git</connection>
-		<developerConnection>scm:git:git@github.com:rjptegelaar/liquid-relay.git/</developerConnection>
-		<url>https://github.com/rjptegelaar/liquid-relay.git</url>
+		<developerConnection>scm:git:git@github.com:rjptegelaar/liquid-relay.git</developerConnection>
+		<url>https://github.com/rjptegelaar/liquid-relay.git/</url>
+		<tag>HEAD</tag>
 	</scm>
 			<build>
 				<finalName>relay-service</finalName>
@@ -71,6 +72,14 @@
 								<version>${surefire.version}</version>
 							</dependency>
 						</dependencies>
+					</plugin>
+					<plugin>
+						<artifactId>maven-release-plugin</artifactId>
+						<configuration>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<remoteTagging>true</remoteTagging>
+							<resume>false</resume>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
