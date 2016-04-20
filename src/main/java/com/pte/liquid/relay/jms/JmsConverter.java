@@ -51,12 +51,10 @@ public class JmsConverter implements Converter<Message> {
 			BytesMessage bm = (BytesMessage) msg;
 			
 			try {
-				byte[] content = new byte[(int) bm.getBodyLength()];
-								
+				byte[] content = new byte[(int) bm.getBodyLength()];							
 				bm.readBytes(content);
 				logger.debug("Received bytesmessage.");
-				return (com.pte.liquid.relay.model.Message) unmarshaller
-						.unmarshal(new String(content));
+				return (com.pte.liquid.relay.model.Message) unmarshaller.unmarshal(new String(content));
 			} catch (JMSException e) {
 				throw new RelayException(e);
 			}
