@@ -54,6 +54,19 @@
 		        </amq:map>			
 			</amq:authorizationPlugin>
 		</amq:plugins>
+		<amq:systemUsage>
+			<amq:systemUsage>
+				<amq:memoryUsage>
+					<amq:memoryUsage limit="256"/>
+				</amq:memoryUsage>
+				<amq:storeUsage>
+            		<amq:storeUsage limit="2 gb"/>
+        		</amq:storeUsage>
+        		<amq:tempUsage>
+            		<amq:tempUsage limit="1 gb"/>
+        		</amq:tempUsage>
+			</amq:systemUsage>
+		</amq:systemUsage>
 	</amq:broker>		
 
 	<amq:connectionFactory id="relayJmsConnectionFactory"

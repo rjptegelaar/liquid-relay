@@ -46,7 +46,7 @@ CLASS="com.pte.liquid.relay.Relay"
 # Any command line arguments to be passed to the RelayService implementations init() method 
 ARGS=""
 
-#The user to run the daemon as
+#The user to run the daemon as, ALWAYS CHANGE THIS
 USER="root"
 
 # The file that will contain our process identification number (pid) for other scripts/programs that need to access it.
