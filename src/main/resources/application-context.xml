@@ -27,10 +27,14 @@
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 	</bean>
 
-	<amq:broker id="relayBroker" useJmx="true" persistent="false">
+	<amq:broker id="relayBroker" useJmx="true" persistent="true" dataDirectory="${liquid.relay.data.directory}">
 		<amq:managementContext>
 			<amq:managementContext createConnector="false"/>
 		</amq:managementContext>
+		<amq:persistenceAdapter>
+			<amq:kahaDB directory="${liquid.relay.data.directory}/kahadb" checksumJournalFiles="true"
+				checkForCorruptJournalFiles="true" />
+		</amq:persistenceAdapter>
 		<amq:transportConnectors>
 			<amq:transportConnector uri="${relay_url}" />
 			<amq:transportConnector uri="${relay_stomp_url}" />
@@ -57,7 +61,7 @@
 		<amq:systemUsage>
 			<amq:systemUsage>
 				<amq:memoryUsage>
-					<amq:memoryUsage limit="256"/>
+					<amq:memoryUsage limit="256 mb"/>
 				</amq:memoryUsage>
 				<amq:storeUsage>
             		<amq:storeUsage limit="2 gb"/>
