@@ -1,6 +1,8 @@
 #!/bin/sh
 #  /etc/init.d/RelayService
-
+#
+# chkconfig: 345 95 05
+#
 ### BEGIN INIT INFO
 # Provides:          RelayService
 # Required-Start:    $remote_fs $syslog
