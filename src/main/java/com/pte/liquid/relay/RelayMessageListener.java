@@ -30,6 +30,7 @@ public class RelayMessageListener implements MessageListener {
 	private final static Logger logger = Logger.getLogger(Relay.class);
 	private Transport transport;
 	private Converter<Message> converter;
+	private int count = 0;
 	
 	
 	public RelayMessageListener(){
@@ -48,6 +49,10 @@ public class RelayMessageListener implements MessageListener {
 	@Override
 	public void onMessage(Message msg) {
 		logger.debug("Received message.");
+		count++;
+		if((count%5)==0){
+			logger.info("Received " + count + " messages");
+		}
 		try {			
 			com.pte.liquid.relay.model.Message m = converter.convert(msg);			
 			transport.send(m);			
@@ -74,6 +79,16 @@ public class RelayMessageListener implements MessageListener {
 
 	public void setConverter(Converter<Message> converter) {
 		this.converter = converter;
+	}
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 
