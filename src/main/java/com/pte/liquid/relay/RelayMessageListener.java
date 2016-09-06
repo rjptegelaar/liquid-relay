@@ -30,7 +30,8 @@ public class RelayMessageListener implements MessageListener {
 	private final static Logger logger = Logger.getLogger(Relay.class);
 	private Transport transport;
 	private Converter<Message> converter;
-	private int count = 0;
+	private long recievedCount = 0;
+	private long sentCount = 0;
 	
 	
 	public RelayMessageListener(){
@@ -49,14 +50,18 @@ public class RelayMessageListener implements MessageListener {
 	@Override
 	public void onMessage(Message msg) {
 		logger.debug("Received message.");
-		count++;
-		if((count%5)==0){
-			logger.info("Received " + count + " messages");
+		recievedCount++;
+		if((recievedCount%1000)==0){
+			logger.info("Received " + recievedCount + " messages");
 		}
 		try {			
 			com.pte.liquid.relay.model.Message m = converter.convert(msg);			
 			transport.send(m);			
 			msg.acknowledge();
+			sentCount++;
+			if((sentCount%1000)==0){
+				logger.info("Sent " + sentCount + " messages");
+			}
 		} catch (RelayException e) {
 			logger.error("Dumping incoming message: " + e.getMessage());
 			if(logger.isDebugEnabled()){
@@ -82,14 +87,26 @@ public class RelayMessageListener implements MessageListener {
 	}
 
 
-	public int getCount() {
-		return count;
+	public long getRecievedCount() {
+		return recievedCount;
 	}
 
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setRecievedCount(long recievedCount) {
+		this.recievedCount = recievedCount;
 	}
+
+
+	public long getSentCount() {
+		return sentCount;
+	}
+
+
+	public void setSentCount(long sentCount) {
+		this.sentCount = sentCount;
+	}
+
+
 
 
 	
