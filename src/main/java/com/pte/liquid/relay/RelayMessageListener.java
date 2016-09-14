@@ -66,12 +66,14 @@ public class RelayMessageListener implements MessageListener {
 			logger.error("Dumping incoming message: " + e.getMessage());
 			if(logger.isDebugEnabled()){
 				e.printStackTrace();				
-			}			
+			}		
+			transport.destroy();
 		} catch (JMSException e) {
 			logger.error("Dumping incoming message: " + e.getMessage());
 			if(logger.isDebugEnabled()){
 				e.printStackTrace();				
 			}
+			transport.destroy();
 		}
 		
 	}
