@@ -73,7 +73,8 @@
 	</amq:broker>		
 
 	<amq:connectionFactory id="relayJmsConnectionFactory"
-		brokerURL="vm://localhost" userName="${liquid.relay.username}" password="${liquid.relay.password}"/>
+		brokerURL="vm://localhost" userName="${liquid.relay.username}" password="${liquid.relay.password}">	 	
+	</amq:connectionFactory>
 
 	<bean id="relaySingleConnectionFactory"
 		class="org.springframework.jms.connection.SingleConnectionFactory">
@@ -106,17 +107,34 @@
 	</bean>
 	
 
-	<bean id="targetJmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+	<bean id="normal" class="org.apache.activemq.ActiveMQConnectionFactory" lazy-init="true">
 		<property name="brokerURL">
 			<value>${server_url}</value>
 		</property>
 		<property name="userName" value="${liquid.server.username}"></property>
 		<property name="password" value="${liquid.server.password}"></property>
+		<property name="useCompression" value="${message_compression}"></property>
 	</bean>
+	
+	<bean id="ssl"
+      class="org.apache.activemq.ActiveMQSslConnectionFactory" lazy-init="true">
+		  <property name="brokerURL" value="${ssl_server_url}" />
+		  <property name="userName" value="${liquid.server.username}"></property>
+		  <property name="password" value="${liquid.server.password}"></property>
+		  <property name="trustStore" value="conf/liquid-client-trust.jks"/>
+		  <property name="trustStorePassword" value="${liquid.keystore.password}"/>		  
+		  <property name="keyStore" value="conf/liquid-client.jks"/>
+		  <property name="keyStorePassword" value="${liquid.keystore.password}"/>
+		  <property name="keyStoreKeyPassword" value="${liquid.keystore.password}"/>
+		  <property name="keyStoreType" value="JKS"/>
+		  <property name="trustStoreType" value="JKS"/>
+		  <property name="useCompression" value="${message_compression}"></property>
+	</bean>
+	
 
 	<bean id="targetSingleConnectionFactory"
 		class="org.springframework.jms.connection.SingleConnectionFactory">
-		<property name="targetConnectionFactory" ref="targetJmsConnectionFactory" />
+		<property name="targetConnectionFactory" ref="${server_type}" />
 		<property name="reconnectOnException" value="true" />
 	</bean>
 
