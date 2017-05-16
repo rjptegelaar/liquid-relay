@@ -54,10 +54,11 @@ public class RelayMessageListener implements MessageListener {
 		if((recievedCount%1000)==0){
 			logger.info("Received " + recievedCount + " messages");
 		}
-		try {			
+		try {		
+			//Always send ack, we don't care if it works.
+			msg.acknowledge();			
 			com.pte.liquid.relay.model.Message m = converter.convert(msg);			
 			transport.send(m);			
-			msg.acknowledge();
 			sentCount++;
 			if((sentCount%1000)==0){
 				logger.info("Sent " + sentCount + " messages");
@@ -66,7 +67,7 @@ public class RelayMessageListener implements MessageListener {
 			logger.error("Dumping incoming message: " + e.getMessage());
 			if(logger.isDebugEnabled()){
 				e.printStackTrace();				
-			}		
+			}					
 			transport.destroy();
 		} catch (JMSException e) {
 			logger.error("Dumping incoming message: " + e.getMessage());

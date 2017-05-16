@@ -149,6 +149,8 @@
 			<ref local="targetCachingConnectionFactory" />
 		</property>
 		<property name="defaultDestinationName" value="com.pte.liquid.relay.in"></property>
+		<property name="deliveryPersistent" value="${liquid.send.persistent}"></property>
+		<property name="timeToLive" value="${liquid.send.timetolive}"></property>
 	</bean>
 
 	<bean id="relayJmsTransport" class="com.pte.liquid.relay.client.jms.JmsTransport">
