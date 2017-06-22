@@ -58,8 +58,8 @@
 				<include>*relay*</include>
 			</includes>
 			<excludes>
-				<exclude>com.pte.liquid.relay:RelayInterfaces</exclude>
-				<exclude>com.pte.liquid.relay:RelayApi</exclude>
+				<exclude>nl.paultegelaar.liquid.relay:RelayInterfaces</exclude>
+				<exclude>nl.paultegelaar.liquid.relay:RelayApi</exclude>
 			</excludes>
 		</dependencySet>
 	</dependencySets>
