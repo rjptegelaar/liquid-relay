@@ -169,7 +169,7 @@
 							</sources>
 						</mapping>
 						<mapping>
-							<directory>${liquid-os-install-dir}/config</directory>
+							<directory>${liquid-relay-install-dir}/config</directory>
 							<sources>
 								<source>
 									<location>config</location>
@@ -180,7 +180,7 @@
 							</sources>
 						</mapping>
 						<mapping>
-							<directory>${liquid-os-install-dir}/logs</directory>
+							<directory>${liquid-relay-install-dir}/logs</directory>
 							<sources>
 								<source>
 									<location>logs</location>
@@ -192,7 +192,7 @@
 							</sources>
 						</mapping>
 						<mapping>
-							<directory>${liquid-os-install-dir}/lib</directory>
+							<directory>${liquid-relay-install-dir}/lib</directory>
 							<dependency>
 								<includes>
 									<include>*:*</include>
@@ -200,7 +200,7 @@
 							</dependency>
 						</mapping>
 						<mapping>
-							<directory>${liquid-os-install-dir}</directory>
+							<directory>${liquid-relay-install-dir}</directory>
 							<sources>
 								<source>
 									<location>target/relay.jar</location>
@@ -355,7 +355,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<liquid-relay-install-dir>/opt/relay-service</liquid-relay-install-dir>
-		<spring.version>4.2.6.RELEASE</spring.version>
 	</properties>
 	<licenses>
 		<license>
