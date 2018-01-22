@@ -244,7 +244,7 @@
 						</goals>
 						<configuration>
 							<executable>curl</executable>							
-							<commandlineArgs>-T${WORKSPACE}/target/rpm/liquid-os/RPMS/noarch/relay-${releaseVersion}-1.noarch.rpm -u${bintray-apiuser}:${bintray-apikey} https://api.bintray.com/content/paultegelaar/RPM/relay/${releaseVersion}/</commandlineArgs>
+							<commandlineArgs>-T${WORKSPACE}/target/rpm/liquid-relay/RPMS/noarch/relay-${releaseVersion}-1.noarch.rpm -u${bintray-apiuser}:${bintray-apikey} https://api.bintray.com/content/paultegelaar/RPM/relay/${releaseVersion}/</commandlineArgs>
 							<environmentVariables>
 								<releaseVersion>dummy</releaseVersion>
 								<WORKSPACE>dummy</WORKSPACE>
