@@ -233,6 +233,29 @@
 				</configuration>
 			</plugin>
 			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>CreateNewVersionInBintray</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>curl</executable>							
+							<commandlineArgs>-T${WORKSPACE}/target/rpm/liquid-os/RPMS/noarch/liquid-relay-${releaseVersion}-1.noarch.rpm -u${bintray-apiuser}:${bintray-apikey} https://api.bintray.com/content/paultegelaar/RPM/liquid-relay/${releaseVersion}/</commandlineArgs>
+							<environmentVariables>
+								<releaseVersion>dummy</releaseVersion>
+								<WORKSPACE>dummy</WORKSPACE>
+							</environmentVariables>
+							<outputFile>curl-fault.log</outputFile>							
+						</configuration>						
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 	</build>
 	<dependencies>
