@@ -174,7 +174,7 @@
 								<source>
 									<location>config</location>
 									<includes>
-										<include>application.properties</include>
+										<include>relay.properties</include>
 									</includes>
 								</source>								
 							</sources>
@@ -355,6 +355,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<liquid-relay-install-dir>/opt/relay-service</liquid-relay-install-dir>
+		<spring.version>4.2.6.RELEASE</spring.version>
 	</properties>
 	<licenses>
 		<license>
