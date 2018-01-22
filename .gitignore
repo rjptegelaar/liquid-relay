@@ -1,5 +1,5 @@
 /target
 /.settings
 /data
-/logs
+/logs/*
 !/logs/.gitkeep
