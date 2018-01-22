@@ -169,10 +169,10 @@
 							</sources>
 						</mapping>
 						<mapping>
-							<directory>${liquid-relay-install-dir}/config</directory>
+							<directory>${liquid-relay-install-dir}/conf</directory>
 							<sources>
 								<source>
-									<location>config</location>
+									<location>conf</location>
 									<includes>
 										<include>relay.properties</include>
 									</includes>
