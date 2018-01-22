@@ -18,14 +18,14 @@
 		<tag>HEAD</tag>
 	</scm>
 	<build>
-		<finalName>relay-service</finalName>
+		<finalName>relay</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>relay-service</id>
+						<id>relay</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
