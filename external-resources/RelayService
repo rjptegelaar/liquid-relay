@@ -12,23 +12,8 @@
 #                    and should be placed in /etc/init.d
 ### END INIT INFO
 
-if env | grep -q ^LIQUID_RELAY_HOME=
- then
-  echo LIQUID_RELAY_HOME IS defined
- else
-	echo LIQUID_RELAY_HOME is not defined
-	echo This environment variable is needed to run this program
-	exit
-fi
-
-if env | grep -q ^JAVA_HOME=
-then
- echo JAVA_HOME IS defined
-else
- echo JAVA_HOME is not defined
- echo This environment variable is needed to run this program
- exit
-fi
+export LIQUID_HOME=/opt/relay-service
+export JAVA_HOME=
 
 NAME="RelayService"
 DESC="RelayService"
@@ -48,8 +33,8 @@ CLASS="com.pte.liquid.relay.Relay"
 # Any command line arguments to be passed to the RelayService implementations init() method 
 ARGS=""
 
-#The user to run the daemon as, ALWAYS CHANGE THIS
-USER="root"
+#The user to run the daemon as
+USER="liquid"
 
 # The file that will contain our process identification number (pid) for other scripts/programs that need to access it.
 PID="/var/run/$NAME.pid"
