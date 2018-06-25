@@ -37,6 +37,8 @@
 			<outputDirectory>/conf</outputDirectory>
 			<includes>
 				<include>relay.properties</include>
+				<include>liquid-client-trust.jks</include>
+				<include>liquid-client.jks</include>
 			</includes>
 		</fileSet>
     	<fileSet> 
